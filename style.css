@@ -8,6 +8,11 @@ body {
 
 h1 {
   color: #333;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #555;
   margin-bottom: 30px;
 }
 
@@ -31,7 +36,7 @@ h1 {
   transform: scale(1.05);
 }
 
-/* Lightbox (popup zoom) */
+/* Lightbox */
 .lightbox {
   display: none;
   position: fixed;
@@ -56,6 +61,7 @@ h1 {
   display: flex;
 }
 
+/* Close button */
 .close {
   position: absolute;
   top: 20px;
@@ -69,3 +75,23 @@ h1 {
 .close:hover {
   color: red;
 }
+
+/* Prev & Next buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+  user-select: none;
+}
+
+.prev:hover, .next:hover {
+  color: #f1f1f1;
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }

@@ -17,25 +17,85 @@
     <a href="#img4"><img src="image4.jpg" alt="Image 4" /></a>
   </div>
 
-  <!-- Zoom popups -->
+  <!-- Lightboxes with navigation -->
   <div class="lightbox" id="img1">
     <a href="#" class="close">&times;</a>
+    <a href="#img4" class="prev">&#10094;</a>
     <img src="image1.jpg" alt="Zoomed Image 1">
+    <a href="#img2" class="next">&#10095;</a>
   </div>
 
   <div class="lightbox" id="img2">
     <a href="#" class="close">&times;</a>
+    <a href="#img1" class="prev">&#10094;</a>
     <img src="image2.jpg" alt="Zoomed Image 2">
+    <a href="#img3" class="next">&#10095;</a>
   </div>
 
   <div class="lightbox" id="img3">
     <a href="#" class="close">&times;</a>
+    <a href="#img2" class="prev">&#10094;</a>
     <img src="image3.jpg" alt="Zoomed Image 3">
+    <a href="#img4" class="next">&#10095;</a>
   </div>
 
   <div class="lightbox" id="img4">
     <a href="#" class="close">&times;</a>
+    <a href="#img3" class="prev">&#10094;</a>
     <img src="image4.jpg" alt="Zoomed Image 4">
+    <a href="#img1" class="next">&#10095;</a>
   </div>
+
+  <!-- Navigation & swipe script -->
+  <script>
+    const images = ["img1","img2","img3","img4"];
+    let current = 0;
+
+    // Show lightbox by index
+    function showLightbox(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      current = index;
+      window.location.hash = images[current];
+    }
+
+    // Arrow key navigation
+    document.addEventListener("keydown", (e) => {
+      if (!window.location.hash) return;
+      if (e.key === "ArrowRight") showLightbox(current + 1);
+      if (e.key === "ArrowLeft") showLightbox(current - 1);
+      if (e.key === "Escape") window.location.hash = "";
+    });
+
+    // Track current lightbox based on hash
+    function updateCurrent() {
+      const hash = window.location.hash.replace("#","");
+      const index = images.indexOf(hash);
+      if(index !== -1) current = index;
+    }
+    window.addEventListener("hashchange", updateCurrent);
+    updateCurrent();
+
+    // Mobile swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener("touchstart", e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+
+    document.addEventListener("touchend", e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      const threshold = 50; // minimum swipe distance
+      if (!window.location.hash) return;
+
+      if (touchEndX < touchStartX - threshold) showLightbox(current + 1);
+      if (touchEndX > touchStartX + threshold) showLightbox(current - 1);
+    }
+  </script>
 </body>
 </html>
