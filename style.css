@@ -95,3 +95,33 @@ h2 {
 
 .prev { left: 20px; }
 .next { right: 20px; }
+
+.whatsapp-order {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.whatsapp-order a {
+  display: inline-flex;
+  align-items: center;
+  background-color: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.whatsapp-order a:hover {
+  background-color: #1DA851;
+  transform: scale(1.05);
+}
+
+.whatsapp-order img {
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
+}
