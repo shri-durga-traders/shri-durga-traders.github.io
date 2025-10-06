@@ -10,14 +10,18 @@
   <h1>SHRI DURGA TRADERS</h1>
   <h2>CRACKERS PRICE LIST 2025</h2>
 
-  <!-- WhatsApp Order Button -->
+
+
+<!-- WhatsApp Order Button (Download + WhatsApp) -->
 <div class="whatsapp-order">
-  <a href="https://wa.me/919176678041?text=Hi%2C%20I%20want%20to%20order%20crackers%20with%2020%%20off%20and%20free%20home%20delivery.%20I%20will%20send%20the%20crackers%20list%20image%20marked%20with%20quantities."
-     target="_blank">
+  <a id="cracker-download" href="list.pdf" download onclick="orderOnWhatsApp(event)">
     <img src="whatsapp.png" alt="WhatsApp" />
     Order Now on WhatsApp
   </a>
 </div>
+
+
+
 
 <br>
   
@@ -107,6 +111,30 @@
       if (touchEndX < touchStartX - threshold) showLightbox(current + 1);
       if (touchEndX > touchStartX + threshold) showLightbox(current - 1);
     }
+
+    function orderOnWhatsApp(event) {
+  event.preventDefault(); // prevent default download
+
+  const phoneNumber = "919176678041"; // your number
+  const message = encodeURIComponent(
+    "Hi, I want to order crackers with 20% off and free home delivery. I will send the crackers list image marked with quantities."
+  );
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+  // Trigger download
+  const link = document.getElementById("cracker-download");
+  const downloadLink = document.createElement("a");
+  downloadLink.href = link.href;
+  downloadLink.download = "list.pdf";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+
+  // Open WhatsApp in new tab
+  window.open(whatsappUrl, "_blank");
+}
+
+
   </script>
 </body>
 </html>
